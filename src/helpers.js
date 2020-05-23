@@ -1,9 +1,13 @@
 const axios = require("axios");
 
-const cryptoClient = async (req, res, next) => {
-  const getPriceInUSD = () =>
-    axios.get("https://example.com/api/price").then(response => response.data);
+// Our function to call third-party service
+const getPriceInUSD = () =>
+  axios.get("https://example.com/api/price").then(response => response.data);
 
+// Our custom client to be used as middleware
+const cryptoClient = async (req, res, next) => {
+  // Attach our client to the req object
+  // To be used later as req.crypto.getPriceInUSD
   req.crypto = {
     getPriceInUSD,
   };
